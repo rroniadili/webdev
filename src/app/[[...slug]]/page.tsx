@@ -27,6 +27,7 @@ import {
 import { basehub } from "basehub";
 
 import { AccordionFaq } from "../_sections/accordion-faq";
+import { VideoShowcase } from "../_sections/video-showcase";
 import { BigFeature, bigFeatureFragment } from "../_sections/features/big-feature";
 import { Callout, calloutFragment } from "../_sections/callout-1";
 import { Callout2, calloutv2Fragment } from "../_sections/callout-2";
@@ -234,6 +235,7 @@ export default async function DynamicPage({
           <>
             <PageView ingestKey={generalEvents.ingestKey} />
             <SectionsUnion sections={sections} eventsKey={generalEvents.ingestKey} />
+            <VideoShowcase />
           </>
         );
       }}
