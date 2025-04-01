@@ -1,11 +1,7 @@
 {
-    "headers": [
-      {
-        "source": "/videos/(.*)",
-        "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "*" },
-          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-        ]
-      }
+    "public": true,
+    "cleanUrls": false,
+    "rewrites": [
+      { "source": "/videos/(.*)", "destination": "/videos/$1" }
     ]
   }
