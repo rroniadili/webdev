@@ -8,6 +8,11 @@ import s from "./companies.module.scss";
 
 export const companiesFragment = fragmentOn("CompaniesComponent", {
   subtitle: true,
+  video: {
+    untitled: {
+    url: true
+    }
+    },
   companies: {
     _title: true,
     url: true,

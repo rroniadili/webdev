@@ -1,5 +1,4 @@
 import { BaseHubImage } from "basehub/next-image";
-
 import { Heading } from "@/common/heading";
 import { Section } from "@/common/layout";
 import { fragmentOn } from "basehub";
@@ -18,24 +17,42 @@ export const bigFeatureFragment = fragmentOn("FeaturesBigImageComponent", {
       },
     },
   },
+  video: {
+    untitled: {
+      url: true
+    }
+  },
   heading: headingFragment,
   image: darkLightImageFragment,
 });
 
 type BigFeature = fragmentOn.infer<typeof bigFeatureFragment>;
 
-export function BigFeature({ featuresBigImageList, heading, image }: BigFeature) {
+export function BigFeature({ featuresBigImageList, heading, image, video }: BigFeature) {
+  console.log('Video data:', {
+    exists: !!video,
+    url: video?.untitled?.url,
+  });
   return (
     <Section container="default">
-      <DarkLightImage
-        height={600}
-        width={1216}
-        {...image}
-        className="block rounded-xl border border-border dark:border-dark-border md:order-3 md:w-full"
-      />
+    {/* Video Section - Styled like the DarkLightImage */}
+    {video?.untitled?.url && (
+      <div className="mx-auto mb-16 max-w-[1216px] md:w-full">
+        <video 
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="block rounded-xl border border-border dark:border-dark-border md:w-full"
+        >
+          <source src={video.untitled.url} type="video/mp4" />
+        </video>
+      </div>
+    )}
       <Heading {...heading}>
         <h4>{heading.title}</h4>
       </Heading>
+
       <div className="flex w-full flex-col items-start gap-4 md:order-2 md:grid md:grid-cols-3 md:gap-16">
         {featuresBigImageList.items.map(({ _title, description, icon }) => (
           <article key={_title} className="flex flex-col gap-4">

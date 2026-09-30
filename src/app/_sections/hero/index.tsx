@@ -30,6 +30,7 @@ export const heroFragment = fragmentOn("HeroComponent", {
 type Hero = fragmentOn.infer<typeof heroFragment>;
 
 export function Hero(hero: Hero & { eventsKey: GeneralEvents["ingestKey"] }) {
+  console.log("Hero Component Props:", hero);
   return (
     <section className="relative min-h-[calc(630px-var(--header-height))] overflow-hidden pb-10">
       <div className="absolute left-0 top-0 z-0 grid h-full w-full grid-cols-[clamp(28px,10vw,120px)_auto_clamp(28px,10vw,120px)] border-b border-border dark:border-dark-border">

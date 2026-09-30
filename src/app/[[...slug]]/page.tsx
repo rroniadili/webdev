@@ -10,6 +10,7 @@ import {
   isCalloutComponent,
   isCalloutV2Component,
   isCompaniesComponent,
+  isDemoFormComponent,
   isFaqComponent,
   isFeatureHeroComponent,
   isFeaturesBigImageComponent,
@@ -27,7 +28,6 @@ import {
 import { basehub } from "basehub";
 
 import { AccordionFaq } from "../_sections/accordion-faq";
-import { VideoShowcase } from "../_sections/video-showcase";
 import { BigFeature, bigFeatureFragment } from "../_sections/features/big-feature";
 import { Callout, calloutFragment } from "../_sections/callout-1";
 import { Callout2, calloutv2Fragment } from "../_sections/callout-2";
@@ -46,6 +46,7 @@ import FeatureHero, { featureHeroFragment } from "../_sections/features/hero";
 import { PageView } from "../_components/page-view";
 import { FreeformText, freeformTextFragment } from "../_sections/freeform-text";
 import { Form, formFragment } from "../_sections/form";
+import { CustomComponent } from "../_sections/custom-component";
 
 export const dynamic = "force-static";
 
@@ -122,8 +123,7 @@ function SectionsUnion({
         return <FeaturesList {...comp} key={comp._id} />;
       case isFeaturesGridComponent(comp):
         return <FeaturesGrid {...comp} key={comp._id} eventsKey={eventsKey} />;
-      case isCompaniesComponent(comp):
-        return <Companies {...comp} key={comp._id} />;
+
       case isFeaturesBigImageComponent(comp):
         return <BigFeature {...comp} key={comp._id} />;
       case isFeaturesSideBySideComponent(comp):
@@ -150,6 +150,8 @@ function SectionsUnion({
         return <FreeformText {...comp} key={comp._id} />;
       case isFormComponent(comp):
         return <Form {...comp} key={comp._id} />;
+      case isDemoFormComponent(comp):
+        return <CustomComponent/>; 
       default:
         return null;
     }
@@ -235,7 +237,6 @@ export default async function DynamicPage({
           <>
             <PageView ingestKey={generalEvents.ingestKey} />
             <SectionsUnion sections={sections} eventsKey={generalEvents.ingestKey} />
-            <VideoShowcase />
           </>
         );
       }}

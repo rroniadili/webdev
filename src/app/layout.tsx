@@ -120,3 +120,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
+// src/common/layout.tsx
+export function Section({ children }: { children: React.ReactNode }) {
+  return <section className="your-styles-here">{children}</section>;
+}

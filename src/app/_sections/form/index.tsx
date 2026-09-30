@@ -39,21 +39,35 @@ export function Form(props: Form) {
           className="flex flex-col gap-3"
           action={async (data) => {
             "use server";
+          
+
+            // BaseHub submission (keep existing functionality)
             const parsedData = parseFormData(
               props.submissions.ingestKey,
               props.submissions.schema,
               data,
             );
+            
             if (!parsedData.success) {
               throw new Error(JSON.stringify(parsedData.errors));
             }
+            
             await sendEvent(
               props.submissions.ingestKey,
-              // @ts-expect-error -- basehub events are typed based on the schema, but this Form component should be generic
+              // @ts-expect-error
               parsedData.data,
             );
           }}
         >
+          {/* Add hidden honeypot field for Web3Forms spam protection */}
+          <input
+            type="checkbox"
+            name="botcheck"
+            className="hidden"
+            style={{ display: "none" }}
+          />
+
+          {/* Existing form fields */}
           {props.submissions.schema.map((field) => {
             if (field.type === "textarea") {
               return (
@@ -75,6 +89,7 @@ export function Form(props: Form) {
               return <LabeledInput key={field.id} {...field} />;
             }
           })}
+
           <div className="mt-3 flex items-center justify-between">
             <Button
               icon={props.cta.icon ?? <ArrowRightIcon className="size-5" />}
